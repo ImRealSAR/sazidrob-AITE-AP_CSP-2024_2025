@@ -2,6 +2,7 @@ from tkinter import *
 
 root = Tk()
 root.geometry("200x200")
+root.Background = "black"
 font = ("Helvetica",16)
 
 login_frame = Frame(root,width=200,height=200,)
