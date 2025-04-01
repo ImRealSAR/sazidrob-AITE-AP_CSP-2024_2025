@@ -1,7 +1,7 @@
 # # This is a multi-purpose calculator made by me (Sazid/SAR) for my AP Computer Science Principles project.
 # # Import necessary modules/libraries from Python
 import math
-import random
+import random #(come back to this later to make random number generator and dice roll)
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
