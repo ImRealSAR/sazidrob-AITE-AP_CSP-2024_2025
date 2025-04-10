@@ -34,17 +34,17 @@ fine_slider = Scale(frame, from_=0, to=500, orient="horizontal", font=font, leng
 fine_slider.grid(row=4, column=1, padx=10, pady=10)
 
 # Slider for how bad the situation at hand is
-severity_label = Label(frame, text="Severity Level:", font=font, bg="LightBlue")
-severity_label.grid(row=5, column=0, padx=10, pady=10)
-severity_slider = Scale(frame, from_=1, to=10, orient="horizontal", font=font, length=300)
-severity_slider.grid(row=5, column=1, padx=10, pady=10)
+bad = Label(frame, text="Severity Level:", font=font, bg="LightBlue")
+bad.grid(row=5, column=0, padx=10, pady=10)
+bad_slider = Scale(frame, from_=1, to=10, orient="horizontal", font=font, length=300)
+bad_slider.grid(row=5, column=1, padx=10, pady=10)
 
 # compute your total fine
 def calculate_results():
     speed = int(speed_entry.get())
     limit = int(limit_entry.get())
     fine_adjustment = fine_slider.get()
-    severity = severity_slider.get()
+    nobad = bad_slider.get()
     
     if speed <= limit:
         result_text = "You are within the speed limit. No ticket!"
