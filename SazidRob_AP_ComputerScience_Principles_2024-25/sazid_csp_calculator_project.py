@@ -7,6 +7,9 @@ from tkinter import *
 from tkinter import messagebox
 from fractions import Fraction
 
+# Keeps track of all previous calculations
+history = []
+
 # Functions for each mathematical operation
 def is_number(value):
     try:
@@ -28,7 +31,7 @@ def divide(x, y):
     if y == 0:
         raise ValueError("Cannot divide by zero!")
     return x / y
-
+        
 def modulo(x, y):
     return x % y
 
@@ -58,6 +61,7 @@ def calculate(operation):
         elif operation == "exponent":
             result = exponent(num1, num2)
         result_label.config(text=f"Result: {result}")
+        history.append(f"{num1} {operation} {num2} = {result}")
     except Exception as e:
         messagebox.showerror("Error", str(e))
 
@@ -66,6 +70,23 @@ def clear_all():
     entry1.delete(0, END)
     entry2.delete(0, END)
     result_label.config(text="Result: ")
+
+# Open a new window to show the history of calculations
+def show_history():
+    history_window = tk.Toplevel(root)
+    history_window.title("Calculation History")
+    history_window.geometry("300x300")
+    history_window.configure(bg="white")
+
+    tk.Label(history_window, text="Previous Calculations:", bg="white", font=("Arial", 12, "bold")).pack(pady=10)
+
+    text_area = tk.Text(history_window, wrap="word", height=12, width=40)
+    text_area.pack(padx=10, pady=5)
+
+    for item in history:
+        text_area.insert(tk.END, item + "\n")
+
+    text_area.config(state="disabled")  # So user can’t type in it
 
 # Create main window
 root = tk.Tk()
@@ -92,6 +113,9 @@ tk.Button(root, text="Exponent", command=lambda: calculate("exponent")).grid(row
 
 # Clear buton 
 tk.Button(root, text="Clear", command=clear_all).grid(row=6, column=0)
+
+# Show history button
+tk.Button(root, text="Show History", command=show_history).grid(row=6, column=1)
 
 # Results isplayed here
 result_label = tk.Label(root, text="Result: ")
