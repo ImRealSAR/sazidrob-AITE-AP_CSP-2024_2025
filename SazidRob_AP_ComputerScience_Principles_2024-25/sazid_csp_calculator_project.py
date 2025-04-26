@@ -71,55 +71,55 @@ def clear_all():
     entry2.delete(0, END)
     result_label.config(text="Result: ")
 
-# Open a new window to show the history of calculations
+# Open a new window to show the history of calculations that the user tried so far. This won't show old calculations if the user exits out and reruns.
 def show_history():
     history_window = tk.Toplevel(root)
     history_window.title("Calculation History")
     history_window.geometry("300x300")
     history_window.configure(bg="white")
-
-    tk.Label(history_window, text="Previous Calculations:", bg="white", font=("Arial", 12, "bold")).pack(pady=10)
-
+    
+    tk.Label(history_window, text="Your Calculations History:", bg="white", font=("Arial", 12, "bold")).pack(pady=10)
+    
     text_area = tk.Text(history_window, wrap="word", height=12, width=40)
     text_area.pack(padx=10, pady=5)
-
+    
     for item in history:
         text_area.insert(tk.END, item + "\n")
+    
+    text_area.config(state="disabled")  # This (above) is so that user can’t type in it
 
-    text_area.config(state="disabled")  # So user can’t type in it
-
-# Create main window
+# The main tKinter standard window
 root = tk.Tk()
 root.title("Calculator--By Sazid/SAR")
 root.geometry("500x500")
 root.configure(bg="black")
 
-# Create input fields
-tk.Label(root, text="Enter the first number:").grid(row=0, column=0)
-entry1 = tk.Entry(root)
-entry1.grid(row=0, column=1)
+# Create input fields with added styling
+tk.Label(root, text="Enter the first number:", bg="black", fg="white", font=("Helvetica", 10)).grid(row=0, column=0, padx=5, pady=5)
+entry1 = tk.Entry(root, font=("Helvetica", 10), bd=2, relief="groove")
+entry1.grid(row=0, column=1, padx=5, pady=5)
 
-tk.Label(root, text="Enter the second number:").grid(row=1, column=0)
-entry2 = tk.Entry(root)
-entry2.grid(row=1, column=1)
+tk.Label(root, text="Enter the second number:", bg="black", fg="white", font=("Helvetica", 10)).grid(row=1, column=0, padx=5, pady=5)
+entry2 = tk.Entry(root, font=("Helvetica", 10), bd=2, relief="groove")
+entry2.grid(row=1, column=1, padx=5, pady=5)
 
-# Create buttons for operations
-tk.Button(root, text="Add", command=lambda: calculate("add")).grid(row=2, column=0)
-tk.Button(root, text="Subtract", command=lambda: calculate("subtract")).grid(row=2, column=1)
-tk.Button(root, text="Multiply", command=lambda: calculate("multiply")).grid(row=3, column=0)
-tk.Button(root, text="Divide", command=lambda: calculate("divide")).grid(row=3, column=1)
-tk.Button(root, text="Modulo", command=lambda: calculate("modulo")).grid(row=4, column=0)
-tk.Button(root, text="Exponent", command=lambda: calculate("exponent")).grid(row=4, column=1)
+# Create buttons for operations with improved styling
+tk.Button(root, text="Add", command=lambda: calculate("add"), bg="#004466", fg="white", font=("Helvetica", 10)).grid(row=2, column=0, padx=5, pady=5)
+tk.Button(root, text="Subtract", command=lambda: calculate("subtract"), bg="#004466", fg="white", font=("Helvetica", 10)).grid(row=2, column=1, padx=5, pady=5)
+tk.Button(root, text="Multiply", command=lambda: calculate("multiply"), bg="#004466", fg="white", font=("Helvetica", 10)).grid(row=3, column=0, padx=5, pady=5)
+tk.Button(root, text="Divide", command=lambda: calculate("divide"), bg="#004466", fg="white", font=("Helvetica", 10)).grid(row=3, column=1, padx=5, pady=5)
+tk.Button(root, text="Modulo", command=lambda: calculate("modulo"), bg="#004466", fg="white", font=("Helvetica", 10)).grid(row=4, column=0, padx=5, pady=5)
+tk.Button(root, text="Exponent", command=lambda: calculate("exponent"), bg="#004466", fg="white", font=("Helvetica", 10)).grid(row=4, column=1, padx=5, pady=5)
 
 # Clear buton 
-tk.Button(root, text="Clear", command=clear_all).grid(row=6, column=0)
+tk.Button(root, text="Clear", command=clear_all, bg="#660000", fg="white", font=("Helvetica", 10)).grid(row=6, column=0, padx=5, pady=5)
 
 # Show history button
-tk.Button(root, text="Show History", command=show_history).grid(row=6, column=1)
+tk.Button(root, text="Show History", command=show_history, bg="#660000", fg="white", font=("Helvetica", 10)).grid(row=6, column=1, padx=5, pady=5)
 
-# Results isplayed here
-result_label = tk.Label(root, text="Result: ")
-result_label.grid(row=5, column=0, columnspan=2)
+# This is for the results to be shown to the calculator user. 
+result_label = tk.Label(root, text="Result: ", bg="black", fg="lime", font=("Helvetica", 12, "bold"))
+result_label.grid(row=5, column=0, columnspan=2, padx=5, pady=10)
 
 root.mainloop()
 # This is a multi-purpose calculator made by me (Sazid/SAR) for my AP Computer Science Principles project.
