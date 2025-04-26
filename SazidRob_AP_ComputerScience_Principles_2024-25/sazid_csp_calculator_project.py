@@ -38,6 +38,44 @@ def modulo(x, y):
 def exponent(x, y):
     return x ** y
 
+def root(x,y): # Need button for this in the GUI
+    if y == 2:
+        return math.sqrt(x)
+    elif y == 0:
+        raise ValueError("You can't root using 0!")
+    elif y == -1:
+        return 1/x
+    elif y == -2:
+        return 1/math.sqrt(x)
+    elif y <= -3:
+        return 1/(x**(1/y))
+    elif y == 1:
+        return x
+    elif x <= 0:
+        raise ValueError("You can't root using negative numbers!")
+    else:
+        return x ** (1/y)
+    
+def dice(x,y): # Need button for this in the GUI
+    '''
+    This dice roll is more like a randmom number generator with user inputted parameter. 
+    However, let's treat it like a dice roll except without any visual 
+    dice, roll, sides, etc
+    '''
+    x = int(input("Enter the number of sides on the dice: "))
+    y = int(input("Enter the number of dice to roll: "))
+    if x == int(x):
+        if y == int(y):
+            return random.randint(1, x) * y
+        else:
+            raise ValueError("You can't roll a non-integer number of dice!")
+    else:
+        raise ValueError("You can't roll a non-integer number of sides on the dice!")
+    
+def statistics(x,y): # Need button for this in the GUI
+    
+    
+
 # Function to perform the said operations user clicks 
 def calculate(operation):
     num1 = entry1.get()
