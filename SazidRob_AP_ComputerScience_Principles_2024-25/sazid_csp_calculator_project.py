@@ -1,8 +1,7 @@
-# # This is a multi-purpose calculator made by me (Sazid/SAR) for my AP Computer Science Principles project.
+# # This is a multi-purpose calculator for my AP Computer Science Principles project.
 # # Import necessary modules/libraries from Python
 import math
-import random #(come back to this later to make random number generator and dice roll)
-import statistics #(come back to this later
+import random
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
@@ -56,26 +55,12 @@ def root(x,y): # Need button for this in the GUI
         raise ValueError("You can't root using negative numbers!")
     else:
         return x ** (1/y)
-    
-def dice(x,y): # Need button for this in the GUI
-    '''
-    This dice roll is more like a randmom number generator with user inputted parameter. 
-    However, let's treat it like a dice roll except without any visual 
-    dice, roll, sides, etc
-    '''
-    x = int(input("Enter the number of sides on the dice: "))
-    y = int(input("Enter the number of dice to roll: "))
-    if x == int(x):
-        if y == int(y):
-            return random.randint(1, x) * y
-        else:
-            raise ValueError("You can't roll a non-integer number of dice!")
-    else:
-        raise ValueError("You can't roll a non-integer number of sides on the dice!")
-    
-def statistics(x,y): # Need button for this in the GUI
-    
-    
+
+def dice(x,y): # GUI-compatible dice function
+    if x != int(x) or y != int(y):
+        raise ValueError("Dice sides and count must be whole numbers!")
+    rolls = [random.randint(1, int(x)) for _ in range(int(y))]
+    return sum(rolls)
 
 # Function to perform the said operations user clicks 
 def calculate(operation):
@@ -99,6 +84,10 @@ def calculate(operation):
             result = modulo(num1, num2)
         elif operation == "exponent":
             result = exponent(num1, num2)
+        elif operation == "root":
+            result = root(num1, num2)
+        elif operation == "dice":
+            result = dice(num1, num2)
         result_label.config(text=f"Result: {result}")
         history.append(f"{num1} {operation} {num2} = {result}")
     except Exception as e:
@@ -122,8 +111,8 @@ def show_history():
     text_area = tk.Text(history_window, wrap="word", height=12, width=40)
     text_area.pack(padx=10, pady=5)
     
-    for item in history:
-        text_area.insert(tk.END, item + "\n")
+    for i in history:
+        text_area.insert(tk.END, i + "\n")
     
     text_area.config(state="disabled")  # This (above) is so that user can’t type in it
 
@@ -149,6 +138,8 @@ tk.Button(root, text="Multiply", command=lambda: calculate("multiply"), bg="#004
 tk.Button(root, text="Divide", command=lambda: calculate("divide"), bg="#004466", fg="white", font=("Helvetica", 10)).grid(row=3, column=1, padx=5, pady=5)
 tk.Button(root, text="Modulo", command=lambda: calculate("modulo"), bg="#004466", fg="white", font=("Helvetica", 10)).grid(row=4, column=0, padx=5, pady=5)
 tk.Button(root, text="Exponent", command=lambda: calculate("exponent"), bg="#004466", fg="white", font=("Helvetica", 10)).grid(row=4, column=1, padx=5, pady=5)
+tk.Button(root, text="Dice Roll", command=lambda: calculate("dice"), bg="#004466", fg="white", font=("Helvetica", 10)).grid(row=5, column=0, padx=5, pady=5)
+tk.Button(root, text="Root", command=lambda: calculate("root"), bg="#004466", fg="white", font=("Helvetica", 10)).grid(row=5, column=1, padx=5, pady=5)
 
 # Clear buton 
 tk.Button(root, text="Clear", command=clear_all, bg="#660000", fg="white", font=("Helvetica", 10)).grid(row=6, column=0, padx=5, pady=5)
@@ -158,7 +149,6 @@ tk.Button(root, text="Show History", command=show_history, bg="#660000", fg="whi
 
 # This is for the results to be shown to the calculator user. 
 result_label = tk.Label(root, text="Result: ", bg="black", fg="lime", font=("Helvetica", 12, "bold"))
-result_label.grid(row=5, column=0, columnspan=2, padx=5, pady=10)
+result_label.grid(row=7, column=0, columnspan=2, padx=5, pady=10)
 
 root.mainloop()
-# This is a multi-purpose calculator made by me (Sazid/SAR) for my AP Computer Science Principles project.
