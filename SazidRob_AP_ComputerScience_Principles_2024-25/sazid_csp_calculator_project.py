@@ -2,10 +2,11 @@
 # # Import necessary modules/libraries from Python
 import math
 import random #(come back to this later to make random number generator and dice roll)
+import statistics #(come back to this later
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
-from fractions import Fraction
+from fractions import Fraction 
 
 # Keeps track of all previous calculations
 history = []
